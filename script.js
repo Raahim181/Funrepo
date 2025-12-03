@@ -1,32 +1,41 @@
-function startExperience() {
-    document.getElementById("callScreen").classList.add("hidden");
-    document.getElementById("mainContent").classList.remove("hidden");
+const compliments = [
+    "You know… you're kinda dangerous. That smile? Yeah, illegal 😌",
+    "If good vibes were a person, it’d suspiciously look like you 👀",
+    "You’re like soft chaos — adorable but unpredictable 💮",
+    "You make the day 27% better just by showing up 🌸",
+    "Your energy? Elite. Your presence? Approved 💗",
+    "You’re cool in a way that should honestly be studied 😭💗"
+];
 
-    let audio = document.getElementById("ringtone");
-    audio.pause();
-}
+const lilyBtn = document.getElementById("lilyBtn");
+const complimentBox = document.getElementById("complimentBox");
+const funnySound = document.getElementById("funnySound");
 
-window.onload = () => {
-    // Auto play ringtone on load
-    let audio = document.getElementById("ringtone");
-    audio.volume = 1.0;
-    audio.play().catch(() => {
-        console.log("Autoplay blocked, will start on interaction");
-    });
-};
+lilyBtn.addEventListener("click", () => {
+    funnySound.currentTime = 0;
+    funnySound.play().catch(() => {});
 
-function releaseChaos() {
-    const container = document.getElementById("chaosContainer");
+    const random = compliments[Math.floor(Math.random() * compliments.length)];
+    complimentBox.textContent = random;
 
-    for (let i = 0; i < 20; i++) {
-        let el = document.createElement("div");
-        el.className = "chaosItem";
-        el.innerHTML = ["💐","🌸","🤣","😭","🤍"][Math.floor(Math.random()*5)];
-        el.style.left = Math.random() * 100 + "%";
-        el.style.fontSize = (30 + Math.random()*30) + "px";
-
-        container.appendChild(el);
-
-        setTimeout(() => el.remove(), 4000);
+    const rect = lilyBtn.getBoundingClientRect();
+    for (let i = 0; i < 8; i++) {
+        const s = document.createElement("div");
+        s.classList.add("sparkle");
+        s.style.left = (rect.left + rect.width/2 + (Math.random()*60 - 30)) + "px";
+        s.style.top = (rect.top + rect.height/2) + "px";
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 1200);
     }
-}
+});
+
+const phoneBtn = document.getElementById("phoneBtn");
+const phoneSound = document.getElementById("phoneSound");
+
+phoneBtn.addEventListener("click", () => {
+    phoneSound.pause();
+    phoneSound.currentTime = 0;
+    phoneSound.play().catch(err => {
+        console.log("Audio playback failed:", err);
+    });
+});
