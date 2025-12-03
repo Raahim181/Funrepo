@@ -2,34 +2,216 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>🌸 Hey You 🌸</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 🌸</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+  body { scroll-behavior: smooth; overflow-x: hidden; color: #fff; background: #000; }
 
+  section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 20px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+
+  /* Hero Section */
+  #hero {
+    background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80');
+    background-attachment: fixed;
+  }
+  #hero h1 {
+    font-size: 2.5rem;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  /* About Section */
+  #about {
+    background-image: url('https://images.unsplash.com/photo-1606761569147-52a9d99cbe07?auto=format&fit=crop&w=1350&q=80');
+    flex-direction: column;
+    color: #fff;
+  }
+  #about #lines {
+    background: rgba(0,0,0,0.6);
+    padding: 25px;
+    border-radius: 15px;
+    max-width: 90%;
+    margin: 20px auto;
+    font-size: 1.3rem;
+    line-height: 1.6;
+  }
+
+  /* Button */
+  #playBtn {
+    display: inline-block;
+    padding: 12px 25px;
+    margin-top: 20px;
+    background: #ff69b4;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: 0.3s;
+  }
+  #playBtn:hover {
+    transform: scale(1.1);
+    background: #ff85c1;
+  }
+
+  /* Floating lilies */
+  .lily {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Lilium_bulbiferum_02.jpg/120px-Lilium_bulbiferum_02.jpg');
+    background-size: cover;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: float 12s linear infinite;
+  }
+  @keyframes float {
+    0% { transform: translate(0, 100vh) rotate(0deg); }
+    50% { transform: translate(50px, 50vh) rotate(180deg); }
+    100% { transform: translate(-50px, -10vh) rotate(360deg); }
+  }
+
+  /* Falling petals */
+  .petal {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Lilium_bulbiferum_02.jpg/60px-Lilium_bulbiferum_02.jpg');
+    background-size: cover;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity:0.8; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity:0.2; }
+  }
+
+  /* Sparkles */
+  .sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: twinkle linear infinite;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0.2; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  iframe {
+    border-radius: 15px;
+    margin-top: 20px;
+    width: 100%;
+    height: 300px;
+  }
+
+  @media(max-width:768px){
+    #hero h1 { font-size: 2rem; }
+    #about #lines { font-size: 1.1rem; padding: 20px; }
+    .lily { width: 40px; height: 40px; }
+    .petal { width: 20px; height: 20px; }
+  }
+</style>
+</head>
 <body>
 
-<h1>🌸 Hi Bestie 🌸</h1>
-<p>(okay… press the button, I dare you 😌)</p>
+<section id="hero">
+  <h1>Hey Afreen, 🌸</h1>
+</section>
 
-<button class="lily-btn" id="lilyBtn">Tap Me 💮</button>
-<button class="lily-btn" id="phoneBtn">📞 Ring Phone</button>
+<section id="about">
+  <div id="lines">
+    <p>Every time we talk, I feel so lucky to know you.<br>
+    I love how you always suggest amazing movies—I’ve discovered so many thanks to you.<br>
+    But what I cherish most is our conversations, your humor, your eyes, your smile, and just how effortlessly cool you are.<br>🌸💖</p>
+    <button id="playBtn">Click me to hear something fun! 🎵</button>
+    <div id="soundcloudPlayer"></div>
+  </div>
+</section>
 
-<div class="compliment-box" id="complimentBox"></div>
+<!-- Floating lilies -->
+<div class="lily" style="left:10%; animation-delay:0s;"></div>
+<div class="lily" style="left:30%; animation-delay:1s;"></div>
+<div class="lily" style="left:50%; animation-delay:2s;"></div>
+<div class="lily" style="left:70%; animation-delay:3s;"></div>
+<div class="lily" style="left:90%; animation-delay:4s;"></div>
 
-<div class="card">
-    <p>A little something extra… because the aesthetic needs to match your vibe 😌💗</p>
-    <img class="decor-img" src="https://plus.unsplash.com/premium_photo-1676068243733-df1880c2aef8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGlseXxlbnwwfHwwfHx8MA%3D%3D">
-</div>
+<!-- Petals + sparkles -->
+<div id="petals"></div>
+<div id="sparkles"></div>
 
-<!-- Sounds -->
-<audio id="funnySound" preload="auto">
-    <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
-</audio>
+<script src="https://w.soundcloud.com/player/api.js"></script>
+<script>
+const playBtn = document.getElementById('playBtn');
+const playerDiv = document.getElementById('soundcloudPlayer');
+let widget = null;
 
-<audio id="phoneSound" preload="auto">
-    <source src="https://www.soundjay.com/phone/sounds/telephone-ring-01a.mp3" type="audio/mpeg">
-</audio>
+playBtn.addEventListener('click', () => {
+  if (!widget) {
+    playerDiv.innerHTML = `<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1901206353&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+    </iframe>`;
+    const iframe = playerDiv.querySelector('iframe');
+    widget = SC.Widget(iframe);
+    widget.bind(SC.Widget.Events.READY, () => { widget.play(); });
+  } else {
+    widget.play();
+  }
+});
 
-<script src="script.js"></script>
+// Floating lilies: only mouse effect on desktop
+if(window.innerWidth > 768){
+  const lilies = document.querySelectorAll('.lily');
+  document.addEventListener('mousemove', (e) => {
+    lilies.forEach((lily, idx) => {
+      const offsetX = e.clientX * 0.01 * (idx+1);
+      const offsetY = e.clientY * 0.01 * (idx+1);
+      lily.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+  });
+}
+
+// Falling petals
+const petalsContainer = document.getElementById('petals');
+const numPetals = window.innerWidth < 768 ? 10 : 15;
+for(let i=0;i<numPetals;i++){
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.style.left = Math.random()*100+'vw';
+  p.style.animationDuration = 4 + Math.random()*4+'s';
+  p.style.animationDelay = Math.random()*4+'s';
+  petalsContainer.appendChild(p);
+}
+
+// Sparkles
+const sparklesContainer = document.getElementById('sparkles');
+const numSparkles = window.innerWidth < 768 ? 30 : 50;
+for(let i=0;i<numSparkles;i++){
+  const s = document.createElement('div');
+  s.className = 'sparkle';
+  s.style.top = Math.random()*100+'vh';
+  s.style.left = Math.random()*100+'vw';
+  s.style.animationDuration = 1 + Math.random()*2+'s';
+  sparklesContainer.appendChild(s);
+}
+</script>
+
 </body>
 </html>
